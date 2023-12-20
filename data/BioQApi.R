@@ -42,6 +42,7 @@ function(file) {
   
   
   Species_Summary <- fread(file.path(file))
+  Species_Summary <- Species_Summary[,c("Sample", "Species", "Abundance")]
   Trait_list <- fread(file.path("CEFAS_Trait_DataBase.csv"))
   
   Species_Summary <- subset(Species_Summary, Abundance != 0)
