@@ -534,7 +534,7 @@ function(file) {
   Indicie_all <- merge(Tax_data, Fun_data, by = c("Sample"))
   Indicie_all <- merge(Indicie_all, Inc_data, by = c("Sample"))
   
-  Reference_site <- c("Ref.1", "Ref.2")
+  Reference_site <- c("Ref.1", "Ref.2", "Ref", "Ref.") 
   
   #=============================================
   # Calculating standard site if multiple refs
