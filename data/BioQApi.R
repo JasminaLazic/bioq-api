@@ -42,6 +42,17 @@ function(file) {
   
   
   Species_Summary <- fread(file.path(file))
+
+
+  column_names <- colnames(Species_Summary)
+  print(column_names)
+
+  required_columns <- c("Sample", "Species", "Abundance")
+  if (!all(required_columns %in% column_names)) {
+    return(list(error = "Headers are wrong"))
+  }
+
+
   Species_Summary <- Species_Summary[,c("Sample", "Species", "Abundance")]
   Trait_list <- fread(file.path("CEFAS_Trait_DataBase.csv"))
   
