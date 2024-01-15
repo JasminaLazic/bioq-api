@@ -42,8 +42,28 @@ function(file) {
   
   
   Species_Summary <- fread(file.path(file))
-
+  
+  column_names <- colnames(Species_Summary)
+  print(column_names)
+  
+  required_columns <- c("Sample", "Species", "Abundance")
+  if (!all(required_columns %in% column_names)) {
+    return("Headers are wrong")
+    
+  }
+  
   Species_Summary <- Species_Summary[,c("Sample", "Species", "Abundance")]
+  
+  if (nrow(Species_Summary) <= 0) {
+    return("The file is empty")
+  }
+  
+  if (!"Ref" %in% Species_Summary$Sample) {
+    return("Ref value is missing")
+  }
+  
+  
+  
   Trait_list <- fread(file.path("CEFAS_Trait_DataBase.csv"))
   
   Species_Summary <- subset(Species_Summary, Abundance != 0)
@@ -213,7 +233,6 @@ function(file) {
   
   
   print("1_BioQ - Done")
-  
 
   
   
@@ -387,7 +406,7 @@ function(file) {
   
   print(Species_Summary)
   station_matrix <- Species_Summary
-
+  
   co_occurence <- data.frame()
   result_df<-data.frame()
   for (R in unique(Species_Summary$Sample)) {
@@ -508,7 +527,7 @@ function(file) {
   
   print("3_BioQ - Done")
   
-
+  
   
   
   
